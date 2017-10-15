@@ -1,3 +1,4 @@
+package zad3;
 
 import java.util.Scanner;
 
@@ -27,6 +28,7 @@ public class Zad3 {
         //initialization
         counterCondOne = 0;
         counterCondTwo = 0;
+        probability = 0;
 
         //processing
         for (int input = 10000; input <= 99999; input++) {
@@ -49,12 +51,14 @@ public class Zad3 {
 
         }
 
-        probability=(1/counterCondTwo);
+        probability = (1.0 / counterCondTwo);
         //output
-        System.out.printf("Probability: %.4f%n"
+        String result = String.format("Probability: %0$.5f%n"
                 + "Numbers that satisfiy condition one: %d%n"
-                + "Numbers that satisfy condition two: %d%n",probability,
+                + "Numbers that satisfy condition two: %d%n", probability,
                 counterCondOne, counterCondTwo);
+
+        System.out.println(result);
     }
 
 }
