@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  * @author user
  */
-public class zad1 {
+public class Func {
 
     /**
      * @param args the command line arguments

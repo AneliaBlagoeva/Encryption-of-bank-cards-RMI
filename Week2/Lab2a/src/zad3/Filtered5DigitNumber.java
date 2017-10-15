@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  * @author user
  */
-public class Zad3 {
+public class Filtered5DigitNumber {
 
     public static void main(String[] args) {
 
