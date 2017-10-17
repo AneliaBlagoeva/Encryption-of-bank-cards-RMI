@@ -5,13 +5,12 @@ package zad2;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author user
  */
 public class ComputeSin {
-    
+
     private double x;
 
     /**
@@ -42,39 +41,33 @@ public class ComputeSin {
         }
         return fact;
     }
-    
-    double computeSin(double x){
-       
+
+    double computeSin(double x) {
+
         //declaration
         double result;
         int iter;//stores next odd number
         double curr,//stores current element
                 previous;//stores previous element
         //initialization
-                result=0.0;
-                iter=1;
-                curr=Math.pow(x,iter)/fact(iter);
-                
+        result = 0.0;
+        iter = 1;
+        curr = Math.pow(x, iter) / fact(iter);
+
         //processing
-        do{
-            result=result+curr;
-            previous=curr;
-            iter=iter+2;
-            curr=Math.pow(x,iter)/fact(iter);
-            
-            result=result-curr;
-            previous=curr;
-            iter=iter+2;
-            curr=Math.pow(x,iter)/fact(iter);
-        }
-        while((curr-previous>0) && (curr-previous<1));
-        
+        do {
+            result = result + curr;
+            previous = curr;
+            iter = iter + 2;
+            curr = Math.pow(x, iter) / fact(iter);
+
+            result = result - curr;
+            previous = curr;
+            iter = iter + 2;
+            curr = Math.pow(x, iter) / fact(iter);
+        } while ((curr - previous > 0) && (curr - previous < 1));
+
         //output
         return result;
-    }
-    
-    public static void main(String[] args) {
-        
-            
     }
 }
