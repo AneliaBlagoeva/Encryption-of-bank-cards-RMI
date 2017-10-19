@@ -32,11 +32,11 @@ public class Filtered5DigitNumber {
 
         //processing
         for (int input = 10000; input <= 99999; input++) {
-            digit1 = input % 10;
-            digit2 = (input / 10) % 10;
+            digit5 = input % 10;
+            digit4 = (input / 10) % 10;
             digit3 = (input / 100) % 10;
-            digit4 = (input / 1000) % 10;
-            digit5 = (input / 10000);
+            digit2 = (input / 1000) % 10;
+            digit1 = (input / 10000);
 
             if ((digit1 >= 3 && digit1 <= 9)
                     && (digit2 >= 2 && digit2 <= 8)
@@ -51,7 +51,7 @@ public class Filtered5DigitNumber {
 
         }
 
-        probability = (1.0 / counterCondTwo);
+        probability = (counterCondTwo / 89999.0);
         //output
         String result = String.format("Probability: %0$.5f%n"
                 + "Numbers that satisfiy condition one: %d%n"
