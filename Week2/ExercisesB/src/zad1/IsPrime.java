@@ -11,6 +11,24 @@ package zad1;
  */
 public class IsPrime {
     public boolean isPrime(int number){
+        //decaration
+        int cnt;
+        
+        //initialization
+        cnt=0;
+        
+        //processing
+        for(int i=1;i<Math.sqrt(number);i++){
+            if(number%i==0){
+                cnt++;
+            }
+        }
+        
+        if(cnt>1){
+            return false;
+        }else{
+            return true;
+        }
         
     }
 }
