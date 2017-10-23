@@ -32,8 +32,7 @@ public class RectangleTest {
         r.setColor(color);
 
         //output
-        System.out.printf("Area of the rectangle is: %.2f%nParameter of the rectangle is: %.2f%n",
-                r.getArea(), r.getParameter());
+        JOptionPane.showMessageDialog(null, "Area of the rectangle is: " + r.getArea()+ " Parameter of the rectangle is:" + r.getParameter());
     }
 
 }

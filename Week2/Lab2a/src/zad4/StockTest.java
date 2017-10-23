@@ -24,7 +24,6 @@ public class StockTest {
         r.setPriviousClosingPrice(Double.parseDouble(previousClosingPrice));
 
         //output
-        System.out.printf("Percent of change is: %.2f%n",
-                r.changePercent());
+        JOptionPane.showMessageDialog(null, "Percent of change is: "+ r.changePercent() + "%");
     }
 }

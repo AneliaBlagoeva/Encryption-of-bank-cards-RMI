@@ -5,7 +5,7 @@
  */
 package zad1;
 
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,24 +20,40 @@ public class TestConvert {
         // TODO code application logic here
 
         //declaration
-        Scanner kbd;
-        double celsiusTemperature;
+        
         Celsius celsius;
         double fahrenheitTemperature;
+        double inputCelsius;
+        String input;
 
         //initialization
-        kbd = new Scanner(System.in);
-        System.out.print("Enter celsius temp: ");
-        celsiusTemperature = kbd.nextDouble();
-
-        celsius = new Celsius(celsiusTemperature);
+        celsius=new Celsius();
+        input = JOptionPane.showInputDialog("Enter temperature in celsius: ");
+        inputCelsius=Double.parseDouble(input);
+        
+        celsius.setCelsius(inputCelsius);
 
         //processing
         fahrenheitTemperature = celsius.convertToFahrenheit();
+        JOptionPane.showMessageDialog(null, "Celsius temperature: " +  inputCelsius+ " in Fahrenheit: " + fahrenheitTemperature);
+        
+        //now the same for fahrenheit
+        
+        //declaration
+        double celsiusTemperature;
+        Fahrenheit fh;
+        double inputFahrenheit;
 
-        //output
-        System.out.printf("Celsius temperature: %.2f in Fahrenheit: %.2f%n",
-                celsiusTemperature, fahrenheitTemperature);
+        //initialization
+        
+        input = JOptionPane.showInputDialog("Enter temperature in Fahrenheit: ");
+        inputFahrenheit=Double.parseDouble(input);
+        
+        fh=new Fahrenheit(inputFahrenheit);
+
+        //processing
+        celsiusTemperature = fh.convertToCelsius(inputFahrenheit);
+        JOptionPane.showMessageDialog(null, "Fahrenheit temperature: " +  inputFahrenheit+ " in Celsius: " + celsiusTemperature);
     }
 
 }
