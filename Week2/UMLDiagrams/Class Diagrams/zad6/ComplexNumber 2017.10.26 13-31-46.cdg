@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="ComplexNumber">
+  <ClassDiagramComponents>
+    <Class name="ComplexNumber" package="zad6" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="imaginaryPart" type="double" visibility="private"/>
+        <Field name="realPart" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="double" name="imaginaryPart"/>
+          <Argument type="double" name="realPart"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getAngle" returnType="double" visibility="public"/>
+        <Method name="getImaginaryPart" returnType="double" visibility="public"/>
+        <Method name="getRealPart" returnType="double" visibility="public"/>
+        <Method name="getMagnitute" returnType="double" visibility="public"/>
+        <Method name="add" returnType="ComplexNumber" visibility="public">
+          <Argument type="ComplexNumber" name="c"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="zad6.ComplexNumber" target="zad6.ComplexNumber" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
