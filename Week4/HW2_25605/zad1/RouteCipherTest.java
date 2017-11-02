@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zad1;
+package hw;
+
+import hw.RouteCipher;
 
 public class RouteCipherTest {
     public static void main(String[] args) {
