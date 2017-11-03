@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Rectangle">
+  <ClassDiagramComponents>
+    <Class name="Rectangle" package="zad1" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="points" type="Point[]" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Point[]" name="points"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Rectangle" name="rect"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getPoints" returnType="Point[]" visibility="public"/>
+        <Method name="setPoints" returnType="void" visibility="public">
+          <Argument type="Point[]" name="points"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations/>
+</ClassDiagram>
