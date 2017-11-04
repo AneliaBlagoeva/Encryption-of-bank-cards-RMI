@@ -24,7 +24,13 @@ public class RouteCipher {
      * @param key new value of key
      */
     public void setKey(int key) {
-        this.key = key;
+        if (key!=0) {
+            this.key = key;
+        } else {
+            System.out.println("The key cannot be 0!");
+            return;
+        }
+        
     }
 
     public RouteCipher(int key) {
@@ -105,7 +111,7 @@ public class RouteCipher {
         return charMatrix;
     }
 
-    private char[] leftTopCornerEncrypt(char[][] charMatrix, int leftCol, int bottomRow, int rightCol, int topRow, int rows, int cols) {
+    private String leftTopCornerEncrypt(char[][] charMatrix, int leftCol, int bottomRow, int rightCol, int topRow, int rows, int cols) {
 
         //declaration and initialization
         char[] result = new char[rows * cols];
@@ -150,10 +156,10 @@ public class RouteCipher {
             }
         }
 
-        return result;
+        return new String(result);
     }
 
-    private char[] rightDownCornerEncrypt(char[][] charMatrix, int leftCol, int bottomRow, int rightCol, int topRow, int rows, int cols) {
+    private String rightDownCornerEncrypt(char[][] charMatrix, int leftCol, int bottomRow, int rightCol, int topRow, int rows, int cols) {
 
         //declaration and initialization
         char[] result = new char[rows * cols];
@@ -198,7 +204,7 @@ public class RouteCipher {
             }
         }
 
-        return result;
+        return new String(result);
     }
     
     private char[][] leftTopCornerDecrypt(char[] result, int leftCol, int bottomRow, int rightCol, int topRow, int rows, int cols) {
@@ -307,9 +313,9 @@ public class RouteCipher {
 
         //processing
         if (key > 0) {
-            result = leftTopCornerEncrypt(charMatrix, 0, (rows - 1), (cols - 1), 0, rows, cols);
+            result = leftTopCornerEncrypt(charMatrix, 0, (rows - 1), (cols - 1), 0, rows, cols).toCharArray();
         } else {
-            result = rightDownCornerEncrypt(charMatrix, 0, (rows - 1), (cols - 1), 0, rows, cols);
+            result = rightDownCornerEncrypt(charMatrix, 0, (rows - 1), (cols - 1), 0, rows, cols).toCharArray();
         }
 
         //output
@@ -318,7 +324,7 @@ public class RouteCipher {
 
     }
 
-    private char[] turnMatrixToArray(char[][] charMatrix, int rows, int cols) {
+    private String turnMatrixToString(char[][] charMatrix, int rows, int cols) {
 
         int iter = 0;//counT of LETTERS from plain text
         char[] result = new char[rows * cols];
@@ -335,7 +341,7 @@ public class RouteCipher {
             }
         }
 
-        return result;
+        return new String(result);
     }
 
     public String decrypt(String ciphertext) {
@@ -356,7 +362,7 @@ public class RouteCipher {
             charMatrix = rightDownCornerDecrypt(plainTextChars, 0, rows - 1, cols - 1, 0, rows, cols);
         }
 
-        result = turnMatrixToArray(charMatrix, rows, cols);
+        result = turnMatrixToString(charMatrix, rows, cols).toCharArray();
 
         //output
         System.out.println(result);

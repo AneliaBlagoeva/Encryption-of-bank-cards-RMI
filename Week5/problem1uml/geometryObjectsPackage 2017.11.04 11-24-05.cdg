@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="geometryObjectsPackage">
+  <ClassDiagramComponents>
+    <Class name="Line" package="geometryObjectsPackage" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="ePoint" type="Point" visibility="private"/>
+        <Field name="sPoint" type="Point" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Point" name="ePoint"/>
+          <Argument type="Point" name="sPoint"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Line" name="line"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getePoint" returnType="Point" visibility="public"/>
+        <Method name="setePoint" returnType="void" visibility="public">
+          <Argument type="Point" name="ePoint"/>
+        </Method>
+        <Method name="getsPoint" returnType="Point" visibility="public"/>
+        <Method name="setsPoint" returnType="void" visibility="public">
+          <Argument type="Point" name="sPoint"/>
+        </Method>
+        <Method name="draw" returnType="void" visibility="public">
+          <Argument type="Group" name="group"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Point" package="geometryObjectsPackage" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="coordinates" type="int[]" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int[]" name="coords"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Point" name="point"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getCoordinates" returnType="int[]" visibility="public"/>
+        <Method name="setCoordinates" returnType="void" visibility="public">
+          <Argument type="int[]" name="coordinates"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="RectangleObj" package="geometryObjectsPackage" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="points" type="Point[]" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Point[]" name="points"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="RectangleObj" name="rect"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getPoints" returnType="Point[]" visibility="public"/>
+        <Method name="setPoints" returnType="void" visibility="public">
+          <Argument type="Point[]" name="points"/>
+        </Method>
+        <Method name="draw" returnType="void" visibility="public">
+          <Argument type="Group" name="group"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="sPoint" source="geometryObjectsPackage.Line" target="geometryObjectsPackage.Point" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ePoint" source="geometryObjectsPackage.Line" target="geometryObjectsPackage.Point" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="geometryObjectsPackage.RectangleObj" target="geometryObjectsPackage.Point" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="geometryObjectsPackage.Line" target="geometryObjectsPackage.Point" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

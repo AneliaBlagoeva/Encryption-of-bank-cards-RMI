@@ -6,13 +6,13 @@
 package zad1;
 
 
-import geometryObjectsPackage.LineObj;
-import geometryObjectsPackage.PointObj;
+import geometryObjectsPackage.Line;
+import geometryObjectsPackage.Point;
 import geometryObjectsPackage.RectangleObj;
-import java.util.Random;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -25,20 +25,19 @@ public class Problem1 extends Application {
     public void start(Stage primaryStage) {
         Group root=new Group();
         Scene scene=new Scene(root,300,250);
-        Random random=new Random();
         int width=(int)scene.getWidth();
         int height=(int)scene.getHeight();
         
-        PointObj sPoint=new PointObj(new int[]{random.nextInt(width),random.nextInt(height)});
-        PointObj ePoint=new PointObj(new int[]{random.nextInt(width),random.nextInt(height)});       
+        Point sPoint=new Point(new int[]{width/3,height/3});
+        Point ePoint=new Point(new int[]{width* 2 /3, height*2 /3});      
          
-        RectangleObj rectangle=new RectangleObj(new PointObj[]{sPoint,ePoint});
+        RectangleObj rectangle=new RectangleObj(new Point[]{sPoint,ePoint});
         rectangle.draw(root);
         
-        LineObj diagonal1=new LineObj(sPoint,ePoint);
+        Line diagonal1=new Line(sPoint,ePoint);
         diagonal1.draw(root);
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Drawing lines and rectangles!");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

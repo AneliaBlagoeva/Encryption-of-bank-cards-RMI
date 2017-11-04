@@ -15,17 +15,17 @@ import javafx.scene.shape.Rectangle;
  */
 public class RectangleObj {
     
-    private PointObj[] points;
+    private Point[] points;
 
     /**
      * Get the value of points
      *
      * @return the value of points
      */
-    public PointObj[] getPoints() {
-       PointObj[] temp= new PointObj[points.length];
+    public Point[] getPoints() {
+       Point[] temp= new Point[points.length];
         for(int i=0;i<points.length;i++){
-            temp[i]= new PointObj(points[i]);//temp[i]=points[i] - plitko kopirane
+            temp[i]= new Point(points[i]);//temp[i]=points[i] - plitko kopirane
         }
         
         return temp;
@@ -36,27 +36,27 @@ public class RectangleObj {
      *
      * @param points new value of points
      */
-    public void setPoints(PointObj[] points) {
+    public void setPoints(Point[] points) {
         if (points!=null && points.length==2) {
-        //this.points = new PointObj[]{new PointObj(points[0]),new PointObj(points[1])};
-        this.points = new PointObj[points.length];
+        //this.points = new Point[]{new Point(points[0]),new Point(points[1])};
+        this.points = new Point[points.length];
         for(int i=0;i<points.length;i++){
-            this.points[i]=points[i]!=null ? new PointObj(points[i]):new PointObj();
+            this.points[i]=points[i]!=null ? new Point(points[i]):new Point();
         }
         } else {
-            this.points=new PointObj[]{new PointObj(),new PointObj()};
+            this.points=new Point[]{new Point(),new Point()};
         }
         
         
         
     }
 
-    public RectangleObj(PointObj[] points) {
+    public RectangleObj(Point[] points) {
         setPoints(points);
     }
 
     public RectangleObj() {
-        this(new PointObj[]{new PointObj(),new PointObj()});
+        this(new Point[]{new Point(),new Point()});
     }
     
     public RectangleObj(RectangleObj rect){
@@ -64,14 +64,14 @@ public class RectangleObj {
     }
 
     public void draw(Group group){
-        int[] pointACoordinates=points[1].getCoordinates();
-        int[] pointBCoordinates=points[0].getCoordinates();
-        double width=Math.abs(pointACoordinates[0]-pointBCoordinates[0]);
+        int[] pointACoordinates=points[0].getCoordinates();
+        int[] pointBCoordinates=points[1].getCoordinates();
+        double width=Math.abs(pointBCoordinates[0]-pointACoordinates[0]);
         
-        double height=Math.abs(pointACoordinates[1]-pointBCoordinates[1]);
+        double height=Math.abs(pointBCoordinates[1]-pointACoordinates[1]);
         
         
-        javafx.scene.shape.Rectangle rectangle=new Rectangle(pointACoordinates[0], pointACoordinates[1],width,height);
+        Rectangle rectangle=new Rectangle(pointACoordinates[0], pointACoordinates[1],width,height);
     
         rectangle.setStroke(Color.RED);
         rectangle.setFill(null);

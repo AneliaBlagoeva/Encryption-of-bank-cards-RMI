@@ -6,23 +6,23 @@
 package geometryObjectsPackage;
 
 import javafx.scene.Group;
-import javafx.scene.shape.Line;
+import javafx.scene.paint.Color;
 
 /**
  *
  * @author grade
  */
-public class LineObj {
+public class Line {
 
-    private PointObj ePoint;
+    private Point ePoint;
 
     /**
      * Get the value of ePoint
      *
      * @return the value of ePoint
      */
-    public PointObj getePoint() {
-        return new PointObj(ePoint);
+    public Point getePoint() {
+        return new Point(ePoint);
     }
 
     /**
@@ -30,24 +30,24 @@ public class LineObj {
      *
      * @param ePoint new value of ePoint
      */
-    public void setePoint(PointObj ePoint) {
+    public void setePoint(Point ePoint) {
         if (ePoint != null) {
-            this.ePoint = new PointObj(ePoint);
+            this.ePoint = new Point(ePoint);
         } else {
-            this.ePoint = new PointObj();
+            this.ePoint = new Point();
         }
 
     }
 
-    private PointObj sPoint;
+    private Point sPoint;
 
     /**
      * Get the value of sPoint
      *
      * @return the value of sPoint
      */
-    public PointObj getsPoint() {
-        return new PointObj(sPoint);
+    public Point getsPoint() {
+        return new Point(sPoint);
     }
 
     /**
@@ -55,25 +55,25 @@ public class LineObj {
      *
      * @param sPoint new value of sPoint
      */
-    public void setsPoint(PointObj sPoint) {
+    public void setsPoint(Point sPoint) {
         if (sPoint != null) {
-            this.sPoint = new PointObj(sPoint);
+            this.sPoint = new Point(sPoint);
         } else {
-            this.sPoint = new PointObj();
+            this.sPoint = new Point();
         }
 
     }
 
-    public LineObj(PointObj ePoint, PointObj sPoint) {
+    public Line(Point ePoint, Point sPoint) {
         setsPoint(sPoint);
         setePoint(ePoint);
     }
 
-    public LineObj() {
-        this(new PointObj(), new PointObj());
+    public Line() {
+        this(new Point(), new Point());
     }
     
-    public LineObj(LineObj line){
+    public Line(Line line){
         this(line.sPoint,line.ePoint);
     }
 
@@ -82,9 +82,10 @@ public class LineObj {
         int[] pointACoordinates=sPoint.getCoordinates();
         int[] pointBCoordinates=ePoint.getCoordinates();
 
-        javafx.scene.shape.Line line=new Line(pointACoordinates[0],pointACoordinates[1],
+        javafx.scene.shape.Line line=new javafx.scene.shape.Line(pointACoordinates[0],pointACoordinates[1],
                 pointBCoordinates[0],pointBCoordinates[1]);
     
+        line.setStroke(Color.RED);
         group.getChildren().add(line);
     }
     @Override

@@ -9,9 +9,9 @@ import hw2_25605.RouteCipher;
 
 public class RouteCipherTest {
     public static void main(String[] args) {
-           RouteCipher r=new RouteCipher(-5);
-           r.encrypt("LIFE IS WAY TOO SHORT FOR WHOLE-WHEAT DONUTS");
-           r.decrypt("XTTEROTIEFILSORWWDSXXXUALOHYAWOTHHONEOFS");
+           RouteCipher r=new RouteCipher(5);
+           String s=r.encrypt("LIFE IS WAY TOO SHORT FOR WHOLE-WHEAT DONUTS");
+           r.decrypt(s);
     }
     
 }

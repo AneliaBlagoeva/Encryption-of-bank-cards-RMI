@@ -2,21 +2,21 @@ package geometryObjectsPackage;
 
 import javafx.scene.Group;
 
-public class PointObj {
+public class Point {
 
     private int[] coordinates;
 
-    public PointObj(int[] coords) {
-        setCoordinates(coordinates);
+    public Point(int[] coords) {
+        setCoordinates(coords);
     }
 
     //NB!!!!
-    public PointObj(PointObj point) {
+    public Point(Point point) {
         this(point.coordinates);
     }
 
     //annonymos
-    public PointObj() {
+    public Point() {
         this(new int[2]);//the same as this(new int[]{0,0})
     }
 
