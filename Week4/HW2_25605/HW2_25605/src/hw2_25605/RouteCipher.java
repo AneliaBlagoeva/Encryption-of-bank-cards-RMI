@@ -5,6 +5,8 @@
  */
 package hw2_25605;
 
+import com.sun.scenario.animation.SplineInterpolator;
+
 public class RouteCipher {
 
     private int key;
@@ -24,13 +26,13 @@ public class RouteCipher {
      * @param key new value of key
      */
     public void setKey(int key) {
-        if (key!=0) {
+        if (key != 0) {
             this.key = key;
         } else {
             System.out.println("The key cannot be 0!");
             return;
         }
-        
+
     }
 
     public RouteCipher(int key) {
@@ -78,7 +80,7 @@ public class RouteCipher {
 
         return rows;
     }
-    
+
     //make matrix from letters
     private char[][] makeMatrix(String plainText) {
         //declaration
@@ -114,45 +116,29 @@ public class RouteCipher {
     private String leftTopCornerEncrypt(char[][] charMatrix, int leftCol, int bottomRow, int rightCol, int topRow, int rows, int cols) {
 
         //declaration and initialization
+        SpiralEncryption s = new SpiralEncryption(charMatrix, leftCol, bottomRow, rightCol, topRow, rows, cols);
         char[] result = new char[rows * cols];
-        int resultIter = 0;
 
         //processing
-        while (leftCol <= rightCol && topRow <= bottomRow) {
+        while (s.getLeftCol() <= s.getRightCol() && s.getTopRow() <= s.getBottomRow()) {
             //print left column
-            if (resultIter < (rows * cols)) {
-                for (int i = topRow; i <= bottomRow; i++) {
-                    result[resultIter] = charMatrix[i][leftCol];
-                    resultIter++;
-                }
-                leftCol++;
+            if (s.getResultIter() < (rows * cols)) {
+                s.leftColumnEncrypt(result);
             }
 
             //print bottom row
-            if (resultIter < (rows * cols)) {
-                for (int i = leftCol; i <= rightCol; i++) {
-                    result[resultIter] = charMatrix[bottomRow][i];
-                    resultIter++;
-                }
-                bottomRow--;
+            if (s.getResultIter() < (rows * cols)) {
+                s.bottomRowEncrypt(result);
             }
 
             //print right col
-            if (resultIter < (rows * cols)) {
-                for (int i = bottomRow; i >= topRow; i--) {
-                    result[resultIter] = charMatrix[i][rightCol];
-                    resultIter++;
-                }
-                rightCol--;
+            if (s.getResultIter() < (rows * cols)) {
+                s.rightColumnEncrypt(result);
             }
 
             //print first row
-            if (resultIter < (rows * cols)) {
-                for (int i = rightCol; i >= leftCol; i--) {
-                    result[resultIter] = charMatrix[topRow][i];
-                    resultIter++;
-                }
-                topRow++;
+            if (s.getResultIter() < (rows * cols)) {
+                s.topRowEncrypt(result);
             }
         }
 
@@ -160,95 +146,61 @@ public class RouteCipher {
     }
 
     private String rightDownCornerEncrypt(char[][] charMatrix, int leftCol, int bottomRow, int rightCol, int topRow, int rows, int cols) {
-
         //declaration and initialization
+        SpiralEncryption s = new SpiralEncryption(charMatrix, leftCol, bottomRow, rightCol, topRow, rows, cols);
         char[] result = new char[rows * cols];
-        int resultIter = 0;
 
         //processing
-        while (leftCol <= rightCol && topRow <= bottomRow) {
+        while (s.getLeftCol() <= s.getRightCol() && s.getTopRow() <= s.getBottomRow()) {
             //print right col
-            if (resultIter < (rows * cols)) {
-                for (int i = bottomRow; i >= topRow; i--) {
-                    result[resultIter] = charMatrix[i][rightCol];
-                    resultIter++;
-                }
-                rightCol--;
+            if (s.getResultIter() < (rows * cols)) {
+                s.rightColumnEncrypt(result);
             }
 
             //print first row
-            if (resultIter < (rows * cols)) {
-                for (int i = rightCol; i >= leftCol; i--) {
-                    result[resultIter] = charMatrix[topRow][i];
-                    resultIter++;
-                }
-                topRow++;
+            if (s.getResultIter() < (rows * cols)) {
+                s.topRowEncrypt(result);
             }
 
             //print left column
-            if (resultIter < (rows * cols)) {
-                for (int i = topRow; i <= bottomRow; i++) {
-                    result[resultIter] = charMatrix[i][leftCol];
-                    resultIter++;
-                }
-                leftCol++;
+            if (s.getResultIter() < (rows * cols)) {
+                s.leftColumnEncrypt(result);
             }
 
             //print bottom row
-            if (resultIter < (rows * cols)) {
-                for (int i = leftCol; i <= rightCol; i++) {
-                    result[resultIter] = charMatrix[bottomRow][i];
-                    resultIter++;
-                }
-                bottomRow--;
+            if (s.getResultIter() < (rows * cols)) {
+                s.bottomRowEncrypt(result);
             }
+
         }
 
         return new String(result);
+
     }
-    
+
     private char[][] leftTopCornerDecrypt(char[] result, int leftCol, int bottomRow, int rightCol, int topRow, int rows, int cols) {
-
-        //declaration and initialization
-        int resultIter = 0;
         char[][] charMatrix = new char[rows][cols];
-
+        SpiralDecryption s = new SpiralDecryption(result, leftCol, bottomRow, rightCol, topRow, rows, cols);
         //processing
-        while (leftCol <= rightCol && topRow <= bottomRow) {
+        while (s.getResultIter() < result.length) {
             //print left column
-            if (resultIter < (rows * cols)) {
-                for (int i = topRow; i <= bottomRow; i++) {
-                    charMatrix[i][leftCol] = result[resultIter];
-                    resultIter++;
-                }
-                leftCol++;
+            if (s.getResultIter() < result.length) {
+                s.leftColumnDecrypt(charMatrix);
             }
 
             //print bottom row
-            if (resultIter < (rows * cols)) {
-                for (int i = leftCol; i <= rightCol; i++) {
-                    charMatrix[bottomRow][i] = result[resultIter];
-                    resultIter++;
-                }
-                bottomRow--;
+            if (s.getResultIter() < result.length) {
+                s.bottomRowDecrypt(charMatrix);
             }
 
             //print right col
-            if (resultIter < (rows * cols)) {
-                for (int i = bottomRow; i >= topRow; i--) {
-                    charMatrix[i][rightCol] = result[resultIter];
-                    resultIter++;
-                }
-                rightCol--;
+            if (s.getResultIter() < result.length) {
+                s.rightColumnDecrypt(charMatrix);
             }
 
             //print first row
-            if (resultIter < (rows * cols)) {
-                for (int i = rightCol; i >= leftCol; i--) {
-                    charMatrix[topRow][i] = result[resultIter];
-                    resultIter++;
-                }
-                topRow++;
+            if (s.getResultIter() < result.length) {
+                s.topRowDecrypt(charMatrix);
             }
         }
 
@@ -257,48 +209,30 @@ public class RouteCipher {
 
     private char[][] rightDownCornerDecrypt(char[] result, int leftCol, int bottomRow, int rightCol, int topRow, int rows, int cols) {
 
-        //declaration and initialization
-        int resultIter = 0;
         char[][] charMatrix = new char[rows][cols];
-
+        SpiralDecryption s = new SpiralDecryption(result, leftCol, bottomRow, rightCol, topRow, rows, cols);
         //processing
-        while (leftCol <= rightCol && topRow <= bottomRow) {
+        while (s.getResultIter() < result.length) {
+
             //print right col
-            if (resultIter < (rows * cols)) {
-                for (int i = bottomRow; i >= topRow; i--) {
-                    charMatrix[i][rightCol] = result[resultIter];
-                    resultIter++;
-                }
-                rightCol--;
+            if (s.getResultIter() < result.length) {
+                s.rightColumnDecrypt(charMatrix);
             }
 
             //print first row
-            if (resultIter < (rows * cols)) {
-                for (int i = rightCol; i >= leftCol; i--) {
-                    charMatrix[topRow][i] = result[resultIter];
-                    resultIter++;
-                }
-                topRow++;
+            if (s.getResultIter() < result.length) {
+                s.topRowDecrypt(charMatrix);
             }
 
             //print left column
-            if (resultIter < (rows * cols)) {
-                for (int i = topRow; i <= bottomRow; i++) {
-                    charMatrix[i][leftCol] = result[resultIter];
-                    resultIter++;
-                }
-                leftCol++;
+            if (s.getResultIter() < result.length) {
+                s.leftColumnDecrypt(charMatrix);
             }
 
             //print bottom row
-            if (resultIter < (rows * cols)) {
-                for (int i = leftCol; i <= rightCol; i++) {
-                    charMatrix[bottomRow][i] = result[resultIter];
-                    resultIter++;
-                }
-                bottomRow--;
+            if (s.getResultIter() < result.length) {
+                s.bottomRowDecrypt(charMatrix);
             }
-
         }
 
         return charMatrix;
