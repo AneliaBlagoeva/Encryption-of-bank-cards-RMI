@@ -5,8 +5,6 @@
  */
 package hw2_25605;
 
-import com.sun.scenario.animation.SplineInterpolator;
-
 public class RouteCipher {
 
     private int key;
