@@ -5,10 +5,10 @@
  */
 package lab8f17javafx;
 
-import com.CipherGenerator;
-import com.Cipherable;
-import com.Result;
-import com.Wrapper;
+import Lab8F17.CipherGenerator;
+import Lab8F17.Cipherable;
+import Lab8F17.Result;
+import Lab8F17.Wrapper;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
