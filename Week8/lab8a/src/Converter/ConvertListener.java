@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Converter;
+package currencyconverter;
 
 /**
  *
  * @author Haemimont
  */
 public interface ConvertListener {
-    public void convertPerformed(ConvertEvent args);
+    public void convertPerformed(ConvertEvent e);
 }

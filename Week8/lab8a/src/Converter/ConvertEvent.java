@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Converter;
+package currencyconverter;
 
 /**
  *
@@ -36,7 +36,7 @@ public class ConvertEvent {
     }
 
     public ConvertEvent(double value) {
-        setValue(value);
+        this.setValue(value);
     }
     
     
