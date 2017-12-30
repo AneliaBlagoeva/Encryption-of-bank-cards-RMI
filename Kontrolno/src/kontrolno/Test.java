@@ -1,6 +1,4 @@
-//: c08:Callbacks.java
-// Using inner classes for callbacks
-import com.bruceeckel.simpletest.*;
+package kontrolno;
 
 interface Incrementable {
   void increment();
@@ -78,4 +76,3 @@ class Caller {
 //      "2"
 //    });
  // }
-} 
