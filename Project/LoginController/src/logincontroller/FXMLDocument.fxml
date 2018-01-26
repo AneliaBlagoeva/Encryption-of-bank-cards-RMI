@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafxcontroller.FXMLDocumentController">
+  <children>
+    <Label fx:id="lblUsername" layoutX="31.0" layoutY="73.0" prefHeight="49.0" prefWidth="217.0" text="Потребителско име" />
+    <TextField fx:id="txtUsername" layoutX="31.0" layoutY="122.0" prefHeight="40.0" prefWidth="254.0" />
+    <Label fx:id="lblPassword" layoutX="33.0" layoutY="213.0" prefHeight="26.0" prefWidth="107.0" text="Парола" />
+    <TextField fx:id="txtPassword" layoutX="31.0" layoutY="249.0" prefHeight="40.0" prefWidth="254.0" />
+    <Button fx:id="btnLogin" layoutX="33.0" layoutY="324.0" mnemonicParsing="false" onAction="#btnClicked" prefHeight="49.0" prefWidth="187.0" text="Вход" />
+    <ImageView fitHeight="230.0" fitWidth="230.0" layoutX="329.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Resources/professional.png" />
+      </image>
+    </ImageView>
+  </children>
+</fx:root>
