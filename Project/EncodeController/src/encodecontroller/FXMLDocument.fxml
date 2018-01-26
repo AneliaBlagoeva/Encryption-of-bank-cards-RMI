@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="453.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="encodecontroller.FXMLDocumentController">
+  <children>
+    <Button id="button" fx:id="btnEncode" layoutX="31.0" layoutY="81.0" onAction="#handleButtonAction" prefHeight="41.0" prefWidth="178.99990000000253" text="Кодирай карта" />
+    <Label fx:id="label" layoutX="126.0" layoutY="120.0" minHeight="16.0" minWidth="69.0" />
+    <Button fx:id="btnDecode" layoutX="245.0" layoutY="81.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="179.0" text="Декодирай карта" />
+    <TextField fx:id="txtCode" layoutX="93.0" layoutY="23.0" prefHeight="39.0" prefWidth="268.0" promptText="Въведете 16 цифрен код" text="" />
+    <TextField fx:id="txtResult" disable="false" layoutX="93.0" layoutY="163.0" prefHeight="39.0" prefWidth="268.0" />
+    <ImageView fitHeight="92.0" fitWidth="122.66666666666666" layoutX="181.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@Resources/professional.png" />
+      </image>
+    </ImageView>
+  </children>
+</AnchorPane>
