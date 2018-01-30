@@ -7,13 +7,13 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root styleClass="glass-pane" type="AnchorPane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="encodeview.FXMLDocumentController">
+<fx:root styleClass="glass-pane" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reusableEncryptionView.FXMLEncryptionPaneController">
     <children>
         <AnchorPane fx:id="pane" prefHeight="350.0" prefWidth="453.0" styleClass="glass-pane">
             <children>
-                <Button id="button" fx:id="btnEncode" layoutX="31.0" layoutY="81.0" prefHeight="41.0" prefWidth="178.99990000000253" text="Кодирай карта" />
+                <Button id="button" fx:id="btnEncode" layoutX="31.0" layoutY="81.0" onAction="#btnEncodeClicked" prefHeight="41.0" prefWidth="179.0" text="Кодирай карта" />
                 <Label fx:id="lblResult" layoutX="92.0" layoutY="170.0" minHeight="16.0" minWidth="69.0" prefHeight="41.0" prefWidth="268.0" />
-                <Button fx:id="btnDecode" layoutX="245.0" layoutY="81.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="179.0" text="Декодирай карта" />
+                <Button fx:id="btnDecode" layoutX="245.0" layoutY="81.0" mnemonicParsing="false" onAction="#btnDecodeClicked" prefHeight="41.0" prefWidth="179.0" text="Декодирай карта" />
                 <TextField fx:id="txtCode" layoutX="93.0" layoutY="23.0" prefHeight="39.0" prefWidth="268.0" promptText="Въведете 16 цифрен код" text="" />
                 <ImageView fitHeight="92.0" fitWidth="115.0" layoutX="181.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
                     <image>
