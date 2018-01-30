@@ -5,12 +5,14 @@
  */
 package reusableEncryptionView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,17 +27,38 @@ import rmiObject.Chryptable;
  */
 public class FXMLEncryptionPaneController extends AnchorPane implements Initializable {
 
+    @FXML
     private Label lblResult;
+    @FXML
     private TextField txtCode;
 
     Chryptable encryption = null;
     @FXML
-    private FXMLEncryptionPaneController encryptPane;
+    private AnchorPane pane;
+    @FXML
+    private Button btnEncode;
+    @FXML
+    private Button btnDecode;
 
     /**
      * Initializes the controller class.
      */
 
+    public FXMLEncryptionPaneController() {
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                getClass().getResource("FXMLDocument.fxml"));
+
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+
+        try {
+            fxmlLoader.load();
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+        
+    @FXML
     private void btnEncodeClicked(ActionEvent event) {
         try {
             String result = encryption.encode(txtCode.getText());
@@ -46,6 +69,7 @@ public class FXMLEncryptionPaneController extends AnchorPane implements Initiali
         }
     }
 
+    @FXML
     private void btnDecodeClicked(ActionEvent event) {
         try {
             String result = encryption.decode(txtCode.getText());
@@ -58,8 +82,8 @@ public class FXMLEncryptionPaneController extends AnchorPane implements Initiali
     }
 
 
-@Override
-        public void initialize(URL url, ResourceBundle rb) {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         String host = "localhost";
         System.out.println(host);
         try {
@@ -70,7 +94,5 @@ public class FXMLEncryptionPaneController extends AnchorPane implements Initiali
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        
-
     }
 }
