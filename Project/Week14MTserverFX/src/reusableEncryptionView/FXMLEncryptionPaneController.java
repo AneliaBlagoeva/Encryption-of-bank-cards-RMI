@@ -7,8 +7,6 @@ package reusableEncryptionView;
 
 import java.io.IOException;
 import java.net.URL;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,21 +16,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import rmiObject.Chryptable;
+import server.Chryptable;
 
 /**
  * FXML Controller class
  *
  * @author Anelia
  */
-public class FXMLEncryptionPaneController extends AnchorPane implements Initializable {
+public class FXMLEncryptionPaneController extends AnchorPane implements Initializable{
 
     @FXML
     private Label lblResult;
     @FXML
     private TextField txtCode;
-
-    Chryptable encryption = null;
     @FXML
     private AnchorPane pane;
     @FXML
@@ -40,13 +36,12 @@ public class FXMLEncryptionPaneController extends AnchorPane implements Initiali
     @FXML
     private Button btnDecode;
 
-    /**
-     * Initializes the controller class.
-     */
+    Chryptable encryption=null;
 
+    
     public FXMLEncryptionPaneController() {
         FXMLLoader fxmlLoader = new FXMLLoader(
-                getClass().getResource("FXMLDocument.fxml"));
+                getClass().getResource("FXMLEncriptionPane.fxml"));
 
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -56,6 +51,7 @@ public class FXMLEncryptionPaneController extends AnchorPane implements Initiali
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+           
     }
         
     @FXML
@@ -81,18 +77,18 @@ public class FXMLEncryptionPaneController extends AnchorPane implements Initiali
 
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String host = "localhost";
-        System.out.println(host);
-        try {
-            Registry registry = LocateRegistry.getRegistry(host, 1099);
-            encryption = (Chryptable) registry.lookup("Encryption");
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                getClass().getResource("FXMLEncriptionPane.fxml"));
 
-            System.out.println("Server object " + encryption + " found");
-        } catch (Exception ex) {
-            System.out.println(ex);
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+
+        try {
+            fxmlLoader.load();
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
         }
     }
 }
