@@ -23,10 +23,10 @@ public class EncryptionView extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLEncriptionPane.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLEncryptionPane.fxml"));
 
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
+       // fxmlLoader.setRoot(this);
+       //fxmlLoader.setController(this);
 
         try {
             fxmlLoader.load();

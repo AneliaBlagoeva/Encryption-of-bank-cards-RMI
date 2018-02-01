@@ -29,14 +29,12 @@ public class FXMLEncryptionPaneController extends AnchorPane implements Initiali
     private Label lblResult;
     @FXML
     private TextField txtCode;
-    @FXML
-    private AnchorPane pane;
-    @FXML
-    private Button btnEncode;
-    @FXML
-    private Button btnDecode;
 
     Chryptable encryption=null;
+    @FXML
+    private Button btnDecode;
+    @FXML
+    private Button btnEncode;
 
     
     public FXMLEncryptionPaneController() {
