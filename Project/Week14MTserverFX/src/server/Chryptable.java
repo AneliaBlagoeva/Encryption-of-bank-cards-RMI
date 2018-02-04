@@ -14,8 +14,8 @@ import java.rmi.RemoteException;
  */
 public interface Chryptable extends Remote {
 
-    String encode(String input) throws RemoteException;
+    String encode() throws RemoteException;
 
-    String decode(String input) throws RemoteException;
+    String decode() throws RemoteException;
 
 }

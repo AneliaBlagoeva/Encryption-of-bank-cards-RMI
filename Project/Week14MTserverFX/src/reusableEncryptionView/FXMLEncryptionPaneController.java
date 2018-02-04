@@ -17,45 +17,46 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import server.Chryptable;
+import server.Encryption;
 
 /**
  * FXML Controller class
  *
  * @author Anelia
  */
-public class FXMLEncryptionPaneController extends AnchorPane implements Initializable{
+public class FXMLEncryptionPaneController extends AnchorPane{
 
     @FXML
     private Label lblResult;
     @FXML
     private TextField txtCode;
-
-    Chryptable encryption=null;
     @FXML
     private Button btnDecode;
     @FXML
     private Button btnEncode;
 
+    Chryptable encryption=null;
     
-    public FXMLEncryptionPaneController() {
-        FXMLLoader fxmlLoader = new FXMLLoader(
-                getClass().getResource("FXMLEncriptionPane.fxml"));
-
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
-
-        try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
-           
-    }
+//    public FXMLEncryptionPaneController() {
+//        FXMLLoader fxmlLoader = new FXMLLoader(
+//                getClass().getResource("FXMLEncriptionPane.fxml"));
+//
+//        fxmlLoader.setRoot(this);
+//        fxmlLoader.setController(this);
+//
+//        try {
+//            fxmlLoader.load();
+//        } catch (IOException exception) {
+//            throw new RuntimeException(exception);
+//        }
+//           
+//    }
         
     @FXML
     private void btnEncodeClicked(ActionEvent event) {
         try {
-            String result = encryption.encode(txtCode.getText());
+            encryption=new Encryption(txtCode.getText());
+            String result = encryption.encode();
             lblResult.textProperty()
                     .setValue(result);
         } catch (Exception e) {
@@ -66,7 +67,8 @@ public class FXMLEncryptionPaneController extends AnchorPane implements Initiali
     @FXML
     private void btnDecodeClicked(ActionEvent event) {
         try {
-            String result = encryption.decode(txtCode.getText());
+            encryption=new Encryption(txtCode.getText());
+            String result = encryption.decode();
             lblResult.textProperty()
                     .setValue(result);
         } catch (Exception e) {
@@ -75,18 +77,18 @@ public class FXMLEncryptionPaneController extends AnchorPane implements Initiali
 
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        FXMLLoader fxmlLoader = new FXMLLoader(
-                getClass().getResource("FXMLEncriptionPane.fxml"));
-
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
-
-        try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
+//    @Override
+//    public void initialize(URL location, ResourceBundle resources) {
+//        FXMLLoader fxmlLoader = new FXMLLoader(
+//                getClass().getResource("FXMLEncriptionPane.fxml"));
+//
+//        fxmlLoader.setRoot(this);
+//        fxmlLoader.setController(this);
+//
+//        try {
+//            fxmlLoader.load();
+//        } catch (IOException exception) {
+//            throw new RuntimeException(exception);
+//        }
+//    }
 }
