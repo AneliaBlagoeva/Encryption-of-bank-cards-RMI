@@ -7,24 +7,27 @@ package server;
 
 import deserialization.User;
 import deserialization.Users;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.Objects;
 
 /**
  *
  * @author Anelia
  */
-public class Login implements ILoginable{
+public class Login extends UnicastRemoteObject implements ILoginable {
+
     String username;
     String password;
 
-    public Login(String username, String password) {
+    public Login(String username, String password) throws RemoteException {
         setUsername(username);
         setPassword(password);
     }
 
-    public Login() {
+    public Login() throws RemoteException {
     }
 
-    
     public String getUsername() {
         return username;
     }
@@ -42,14 +45,29 @@ public class Login implements ILoginable{
     }
 
     @Override
-    public boolean checkCredentials(String username, String password, Users u) {
-        boolean result=u.getUsers().contains(new User(username,password));
-        System.out.printf("User is signed up: " + result );
-        return result;
+    public boolean checkCredentials(Users u) {
         
+        boolean result = u.getUsers().contains(this);
+        System.out.printf("User is signed up: " + result);
+        return result;
+
     }
-    
-    
-    
-    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof User)) {
+            return false;
+        } else {
+            return (this.username.equals(((User) obj).getUsername()) && this.password.equals(((User) obj).getPassword()));
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.username);
+        hash = 67 * hash + Objects.hashCode(this.password);
+        return hash;
+    }
+
 }

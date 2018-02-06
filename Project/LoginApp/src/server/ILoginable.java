@@ -7,11 +7,12 @@ package server;
 
 import deserialization.Users;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 /**
  *
  * @author Anelia
  */
 public interface ILoginable extends Remote{
-    public boolean checkCredentials(String username, String password, Users list);
+    public boolean checkCredentials(Users list) throws RemoteException ;
 }
