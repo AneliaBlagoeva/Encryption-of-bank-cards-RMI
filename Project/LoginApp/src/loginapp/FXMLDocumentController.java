@@ -48,7 +48,7 @@ public class FXMLDocumentController implements Initializable {
         String userName=txtUsername.getText();
         String password=txtPassword.getText();
         login=new Login(userName,password);
-        login.checkCredentials(userName, password, u);
+        login.checkCredentials(u);
         }catch(Exception e){
             System.out.println("Error.");
         }
