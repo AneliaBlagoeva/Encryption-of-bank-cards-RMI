@@ -46,11 +46,15 @@ public class Login extends UnicastRemoteObject implements ILoginable {
 
     @Override
     public boolean checkCredentials(Users u) {
+         boolean flag=false;
+         
         
-        boolean result = u.getUsers().contains(this);
-        System.out.printf("User is signed up: " + result);
-        return result;
-
+        if( u.getUsers().contains(this)){
+        int index=u.getUsers().indexOf(this);
+        if(u.getUsers().get(index).getHasRights()==1) flag=true;
+        }
+        
+        return flag;
     }
 
     @Override
