@@ -3,10 +3,12 @@
 <user>
 <username>Anelia</username>
 <password>12346</password>
+<hasRights>1</hasRights>
 </user>
 <user>
 <username>Desi</username>
 <password>654321</password>
+<hasRights>0</hasRights>
 </user>
 </users>
 

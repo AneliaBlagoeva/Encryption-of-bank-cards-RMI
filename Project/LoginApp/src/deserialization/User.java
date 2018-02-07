@@ -12,10 +12,21 @@ package deserialization;
 public class User {
     String username;
     String password;
+    int hasRights;
+    
+    public User(String username, String password, int hasRights) {
+        setHasRights(hasRights);
+        setPassword(password);
+        setUsername(username);
+    }
+    
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public int getHasRights() {
+        return hasRights;
+    }
+
+    public void setHasRights(int hasRights) {
+        this.hasRights = hasRights;
     }
 
     public String getUsername() {
