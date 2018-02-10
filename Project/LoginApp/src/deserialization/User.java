@@ -5,6 +5,8 @@
  */
 package deserialization;
 
+import java.util.Objects;
+
 /**
  *
  * @author Anelia
@@ -20,6 +22,11 @@ public class User {
         setUsername(username);
     }
     
+     public User(String username, String password) {
+        setPassword(password);
+        setUsername(username);
+    }
+     
 
     public int getHasRights() {
         return hasRights;
@@ -48,6 +55,22 @@ public class User {
     public User() {
     }
     
+        @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof User)) {
+            return false;
+        } else {
+            return (this.username.equals(((User) obj).getUsername()) && this.password.equals(((User) obj).getPassword()));
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.username);
+        hash = 67 * hash + Objects.hashCode(this.password);
+        return hash;
+    }
     
     
 }

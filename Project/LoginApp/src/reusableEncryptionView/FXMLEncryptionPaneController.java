@@ -5,13 +5,13 @@
  */
 package reusableEncryptionView;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.rmi.AccessException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -24,7 +24,7 @@ import server.Encryption;
  *
  * @author Anelia
  */
-public class FXMLEncryptionPaneController extends AnchorPane{
+public class FXMLEncryptionPaneController extends AnchorPane {
 
     @FXML
     private Label lblResult;
@@ -35,8 +35,8 @@ public class FXMLEncryptionPaneController extends AnchorPane{
     @FXML
     private Button btnEncode;
 
-    Chryptable encryption=null;
-    
+    Chryptable encryption = null;
+
 //    public FXMLEncryptionPaneController() {
 //        FXMLLoader fxmlLoader = new FXMLLoader(
 //                getClass().getResource("FXMLEncriptionPane.fxml"));
@@ -51,15 +51,14 @@ public class FXMLEncryptionPaneController extends AnchorPane{
 //        }
 //           
 //    }
-        
     @FXML
     private void btnEncodeClicked(ActionEvent event) {
         try {
-            encryption=new Encryption(txtCode.getText());
+            encryption = new Encryption(txtCode.getText());
             String result = encryption.encode();
             lblResult.textProperty()
                     .setValue(result);
-        } catch (Exception e) {
+        } catch (RemoteException e) {
             System.out.println("Error while encoding");
         }
     }
@@ -67,28 +66,28 @@ public class FXMLEncryptionPaneController extends AnchorPane{
     @FXML
     private void btnDecodeClicked(ActionEvent event) {
         try {
-            encryption=new Encryption(txtCode.getText());
+            encryption = new Encryption(txtCode.getText());
             String result = encryption.decode();
             lblResult.textProperty()
                     .setValue(result);
-        } catch (Exception e) {
+        } catch (RemoteException e) {
             System.out.println("Error while decoding");
         }
 
     }
 
-//    @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//        FXMLLoader fxmlLoader = new FXMLLoader(
-//                getClass().getResource("FXMLEncriptionPane.fxml"));
-//
-//        fxmlLoader.setRoot(this);
-//        fxmlLoader.setController(this);
-//
-//        try {
-//            fxmlLoader.load();
-//        } catch (IOException exception) {
-//            throw new RuntimeException(exception);
-//        }
-//    }
+    public void initializeRMI() {
+        try {
+            Registry registry = LocateRegistry.getRegistry(1099);
+            Chryptable encryption = null;
+            try {
+                encryption = (Chryptable) registry.lookup("Encryption");
+            } catch (NotBoundException | AccessException ex) {
+                System.out.println(ex);
+            }
+            System.out.println("Server object " + encryption + " found");
+        } catch (RemoteException ex) {
+            System.out.println("Cannot connect to server!");
+        }
+    }
 }

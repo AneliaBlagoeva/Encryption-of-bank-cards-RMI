@@ -7,7 +7,13 @@ package loginapp;
 
 import deserialization.DeserealizationWarpper;
 import deserialization.Users;
+import java.io.IOException;
 import java.net.URL;
+import java.rmi.AccessException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,16 +24,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import server.Login;
+import server.ILoginable;
+
+
 
 /**
  *
  * @author Anelia
  */
-public class FXMLDocumentController implements Initializable {
+public class FXMLDocumentController{
 
     @FXML
     private Label lblPassword;
@@ -40,35 +46,56 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button btnLogin;
 
-    public Login login = null;
+    public ILoginable loginObj;
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+   
+    public void initializeRMI() {
+         try {
+            Registry registry = LocateRegistry.getRegistry(1099);
+
+            try {
+                loginObj = (ILoginable) registry.lookup("Login");  
+                
+                
+            } catch (NotBoundException | AccessException ex) {
+                System.out.println(ex);
+            }
+            System.out.println("Server object " + loginObj + " found");
+        } catch (RemoteException ex) {
+            System.out.println("Cannot connect to server!");
+        }
     }
 
     @FXML
-    private void onBtnLoginClicked(ActionEvent event) {
+    private void onBtnLoginClicked(ActionEvent event) throws IOException {
         try {
-            Users u = DeserealizationWarpper.deserealization();
+            
             String userName = txtUsername.getText();
             String password = txtPassword.getText();
-            login = new Login(userName, password);
-            if (!(login.checkCredentials(u))) {
+            
+            initializeRMI();
+            //LoginWrapper login=new LoginWrapper((Login)loginObj.getLoginWrapper());
+            
+            Parent root1;
+            if (!(loginObj.checkCredentials(userName,password))) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindow.fxml"));
-                    Parent root1 = (Parent) fxmlLoader.load();
+                    root1 = (Parent) fxmlLoader.load();
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root1));
                     stage.show();
-                } catch (Exception e) {
-                    System.out.println("Error.");
+                } catch (IOException e) {
+                    System.out.println("Error." + e);
                 }
             }else{
-                        System.out.println("TODO: Load encode view");
+                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/reusableEncryptionView/FXMLEncryptionPane.fxml"));
+                    root1 = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root1));
+                    stage.show();
                         }
-        } catch (Exception e) {
-            System.out.println("Error.");
+        } catch (RemoteException e) {
+            System.out.println("Error." + e);
         }
 
     }

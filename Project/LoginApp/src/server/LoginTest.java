@@ -5,9 +5,12 @@
  */
 package server;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,8 +23,17 @@ public class LoginTest {
             Registry registry = LocateRegistry.createRegistry(1099);
 
             registry.rebind("Login", o);
+            
+            Chryptable obj = new Encryption();
+            
+            registry.rebind("Encryption", obj);
+            System.in.read();
+            System.exit(0);
+            
         } catch (RemoteException ex) {
             System.out.println("remote" + ex);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

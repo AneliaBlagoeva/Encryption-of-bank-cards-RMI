@@ -14,5 +14,6 @@ import java.rmi.RemoteException;
  * @author Anelia
  */
 public interface ILoginable extends Remote{
-    public boolean checkCredentials(Users list) throws RemoteException ;
+    public boolean checkCredentials(String username, String password) throws RemoteException ;
+   
 }

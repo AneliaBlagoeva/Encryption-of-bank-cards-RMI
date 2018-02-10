@@ -5,6 +5,7 @@
  */
 package server;
 
+import deserialization.DeserealizationWarpper;
 import deserialization.User;
 import deserialization.Users;
 import java.rmi.RemoteException;
@@ -19,13 +20,16 @@ public class Login extends UnicastRemoteObject implements ILoginable {
 
     String username;
     String password;
+    Users u;
 
     public Login(String username, String password) throws RemoteException {
+        u = DeserealizationWarpper.deserealization();
         setUsername(username);
         setPassword(password);
     }
 
     public Login() throws RemoteException {
+                u = DeserealizationWarpper.deserealization();
     }
 
     public String getUsername() {
@@ -45,33 +49,20 @@ public class Login extends UnicastRemoteObject implements ILoginable {
     }
 
     @Override
-    public boolean checkCredentials(Users u) {
-         boolean flag=false;
-         
-        
-        if( u.getUsers().contains(this)){
-        int index=u.getUsers().indexOf(this);
-        if(u.getUsers().get(index).getHasRights()==1) flag=true;
+    public boolean checkCredentials(String uname,String pass) {
+        boolean flag = false;
+
+        User user=new User(uname,pass);
+        if (u.getUsers().contains(user)) {
+            int index = u.getUsers().indexOf(user);
+            if (u.getUsers().get(index).getHasRights() == 1) {
+                flag = true;
+            }
         }
-        
+
         return flag;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof User)) {
-            return false;
-        } else {
-            return (this.username.equals(((User) obj).getUsername()) && this.password.equals(((User) obj).getPassword()));
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.username);
-        hash = 67 * hash + Objects.hashCode(this.password);
-        return hash;
-    }
-
+         
 }
+
