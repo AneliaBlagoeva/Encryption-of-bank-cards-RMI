@@ -5,6 +5,8 @@
  */
 package reusableEncryptionView;
 
+import common.Chryptable;
+import java.io.IOException;
 import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -12,12 +14,14 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import server.Chryptable;
-import server.Encryption;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -37,27 +41,24 @@ public class FXMLEncryptionPaneController extends AnchorPane {
 
     Chryptable encryption = null;
 
-//    public FXMLEncryptionPaneController() {
-//        FXMLLoader fxmlLoader = new FXMLLoader(
-//                getClass().getResource("FXMLEncriptionPane.fxml"));
-//
-//        fxmlLoader.setRoot(this);
-//        fxmlLoader.setController(this);
-//
-//        try {
-//            fxmlLoader.load();
-//        } catch (IOException exception) {
-//            throw new RuntimeException(exception);
-//        }
-//           
-//    }
+    public FXMLEncryptionPaneController() {
+        initializeRMI();
+           
+    }
     @FXML
-    private void btnEncodeClicked(ActionEvent event) {
+    private void btnEncodeClicked(ActionEvent event) throws IOException {
         try {
-            encryption = new Encryption(txtCode.getText());
-            String result = encryption.encode();
-            lblResult.textProperty()
-                    .setValue(result);
+            
+            String result = encryption.encode(txtCode.getText());
+            if(result!=""){
+            lblResult.textProperty().setValue(result);}
+            else{
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindow.fxml"));
+                   Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+                    }
         } catch (RemoteException e) {
             System.out.println("Error while encoding");
         }
@@ -66,8 +67,8 @@ public class FXMLEncryptionPaneController extends AnchorPane {
     @FXML
     private void btnDecodeClicked(ActionEvent event) {
         try {
-            encryption = new Encryption(txtCode.getText());
-            String result = encryption.decode();
+            
+            String result = encryption.decode(txtCode.getText());
             lblResult.textProperty()
                     .setValue(result);
         } catch (RemoteException e) {
@@ -79,7 +80,6 @@ public class FXMLEncryptionPaneController extends AnchorPane {
     public void initializeRMI() {
         try {
             Registry registry = LocateRegistry.getRegistry(1099);
-            Chryptable encryption = null;
             try {
                 encryption = (Chryptable) registry.lookup("Encryption");
             } catch (NotBoundException | AccessException ex) {

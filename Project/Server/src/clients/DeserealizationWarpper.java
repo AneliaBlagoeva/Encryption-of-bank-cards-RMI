@@ -1,9 +1,12 @@
+package clients;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package deserialization;
+
+
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
@@ -22,7 +25,7 @@ public class DeserealizationWarpper {
         XStream xs = new XStream(new StaxDriver());
         Users u = new Users();
         try {
-            File xmlFile = new File("C:\\Users\\Anelia\\Documents\\NetBeansProjects\\First-steps-in-JAVA\\Project\\LoginApp\\src\\deserialization\\user.xml");
+            File xmlFile = new File("user.xml");
 
 
             Reader fileReader = new FileReader(xmlFile);
