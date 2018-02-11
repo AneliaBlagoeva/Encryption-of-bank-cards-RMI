@@ -48,10 +48,12 @@ public class FXMLEncryptionPaneController extends AnchorPane {
     @FXML
     private void btnEncodeClicked(ActionEvent event) throws IOException {
         try {
-            
             String result = encryption.encode(txtCode.getText());
-            if(result!=""){
-            lblResult.textProperty().setValue(result);}
+
+            if(!"".equals(result)){
+            lblResult.textProperty().setValue(result);
+           // encryption.addCard(result);
+            }
             else{
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindow.fxml"));
                    Parent root1 = (Parent) fxmlLoader.load();

@@ -19,5 +19,5 @@ public interface Chryptable extends Remote {
     String encode(String code) throws RemoteException;
 
     String decode(String code) throws RemoteException;
-
+    
 }

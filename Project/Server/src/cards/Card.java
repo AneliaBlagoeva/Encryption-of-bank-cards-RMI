@@ -5,8 +5,8 @@
  */
 package cards;
 
-import clients.User;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Card{
     String cardId;
-    ArrayList<String> encodedCode;
+    ArrayList<String> encodedCodes;
 
     public String getCardId() {
         
@@ -23,6 +23,7 @@ public class Card{
 
     public Card(String cardId) {
         this.cardId = cardId;
+        encodedCodes=new ArrayList<String>();
     }
     
     
@@ -35,17 +36,17 @@ public class Card{
         }
     }
 
-    public ArrayList<String> getEncodedCode() {
-        return encodedCode;
+    public ArrayList<String> getEncodedCodes() {
+        return encodedCodes;
     }
 
-    public void setEncodedCode(ArrayList<String> encodedCode) {
-        this.encodedCode = encodedCode;
+    public void setEncodedCodes(ArrayList<String> encodedCodes) {
+        this.encodedCodes = encodedCodes;
     }
 
     public Card(String cardId, ArrayList<String> encodedCode) {
         setCardId(cardId);
-        setEncodedCode(encodedCode);
+        setEncodedCodes(encodedCode);
     }
 
  @Override
@@ -55,6 +56,13 @@ public class Card{
         } else {
             return (this.cardId.equals(((Card) obj).getCardId()) );
         }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 11 * hash + Objects.hashCode(this.cardId);
+        return hash;
     }
 
 }

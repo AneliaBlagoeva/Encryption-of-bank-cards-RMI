@@ -32,7 +32,7 @@ public class Login extends UnicastRemoteObject implements ILoginable {
     }
 
     public Login() throws RemoteException {
-                u = DeserealizationWarpper.deserealization();
+    u = DeserealizationWarpper.deserealization();
     }
 
     public String getUsername() {

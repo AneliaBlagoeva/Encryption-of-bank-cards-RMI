@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="278.0" prefWidth="405.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="server.FXMLDocumentController">
+<AnchorPane prefHeight="278.0" prefWidth="405.0" styleClass="glass-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.FXMLDocumentController">
    <children>
       <Button layoutX="44.0" layoutY="64.0" mnemonicParsing="false" onAction="#sotedByBankCards" prefHeight="31.0" prefWidth="317.0" text="Изтегли сортирани по банкови карти" />
       <Button layoutX="44.0" layoutY="158.0" mnemonicParsing="false" onAction="#sortedByEncrypted" text="Изтегли сортирани по криптирани номера" />

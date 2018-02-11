@@ -14,10 +14,12 @@ import java.util.ArrayList;
 
 public class Encryption extends UnicastRemoteObject implements Chryptable {
 
-    Cards cards = new Cards();
+    //create empty cards
+    //fill with encode
+    public static Cards cards;
 
     public Encryption() throws RemoteException {
-
+        cards = new Cards();
     }
 
     @Override
@@ -36,13 +38,13 @@ public class Encryption extends UnicastRemoteObject implements Chryptable {
         if (cards.getEncryptedCards().contains(c)) {
             int index = cards.getEncryptedCards().indexOf(c);
             c = cards.getEncryptedCards().get(index);
-            int num = c.getEncodedCode().size();
+            int num = c.getEncodedCodes().size();
             if (num > 12) {
-                return "";
+                System.out.println("Error while adding!");
             }
-            c.getEncodedCode().add(resultArr.toString());
+            c.getEncodedCodes().add(code);
         } else {
-            c.getEncodedCode().add(resultArr.toString());
+            c.getEncodedCodes().add(code);
             cards.getEncryptedCards().add(c);
         }
 

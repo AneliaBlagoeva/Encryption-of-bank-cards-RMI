@@ -5,33 +5,71 @@
  */
 package server;
 
-import cards.Cards;
-import java.net.URL;
-import java.util.ResourceBundle;
+import cards.Card;
+import common.ILoginable;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
 /**
  *
  * @author Anelia
  */
-public class FXMLDocumentController implements Initializable {
-    private Cards cards;
+public class FXMLDocumentController {
+
+    @FXML
+    private Button sotedByBankCards;
+    @FXML
+    private Button sortedByEncrypted;
+
+    private Encryption encryp;
+    //private Cards cards;
     
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    public void inizializeServer(){
+                try {
+            ILoginable o = new Login();
+            Registry registry = LocateRegistry.createRegistry(1099);
+
+            registry.rebind("Login", o);
+
+            encryp = new Encryption();
+
+            registry.rebind("Encryption", encryp);
+//            System.in.read();
+ //           System.exit(0);
+
+        } catch (RemoteException ex) {
+            System.out.println("remote" + ex);
+   //     } catch (IOException ex) {
+  //          Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public FXMLDocumentController() {
+       inizializeServer();
+    }
 
     @FXML
     private void sotedByBankCards(ActionEvent event) {
-        cards.sortByBankId();
-        
+       // encryp.getCards().sortByBankId();
+
     }
 
     @FXML
     private void sortedByEncrypted(ActionEvent event) {
+     /*   ArrayList<String> allCards = new ArrayList<String>();
+        for (Card c : encryp.getCards().getEncryptedCards()) {
+            allCards.addAll(c.getEncodedCodes());
+        }
+
+        allCards.sort((one, other) -> one.compareTo(other));
+
+        //zapisvam vyv file encrypted ot all cards i izvikvam decode(string)
     }
-    
+*/
+    }
 }
