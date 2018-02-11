@@ -5,6 +5,7 @@
  */
 package cards;
 
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -21,15 +22,13 @@ public class Card{
         return cardId;
     }
 
-    public Card(String cardId) {
-        this.cardId = cardId;
+    public Card(String cardId){
+        setCardId(cardId);
         encodedCodes=new ArrayList<String>();
     }
-    
-    
 
     public void setCardId(String cardId) {
-        if(cardId.length()<16){
+        if(cardId.length()>16){
             System.out.println("Invalid number");
         }else{
         this.cardId = cardId;
@@ -65,4 +64,11 @@ public class Card{
         return hash;
     }
 
+    @Override
+    public String toString() {
+        return "Card{" + "cardId=" + cardId + ", encodedCodes=" + encodedCodes + '}';
+    }
+
+    
+    
 }

@@ -12,15 +12,24 @@ import java.util.ArrayList;
  * @author Anelia
  */
 public class Cards implements Sortable{
-    public ArrayList<Card> encryptedCards;
+    public ArrayList<Card> encryptedCards=new ArrayList<Card>();
 
     public Cards() {
     }
     
-    
 
     public ArrayList<Card> getEncryptedCards() {
         return encryptedCards;
+    }
+    
+    
+    public boolean contains(Card c){
+        if(encryptedCards.isEmpty())
+        {
+            return false;
+        }else{
+        return encryptedCards.contains(c);
+        }
     }
 
     public void setEncryptedCards(ArrayList<Card> encryptedCards) {
@@ -34,6 +43,7 @@ public class Cards implements Sortable{
     @Override
     public void sortByBankId() {
         encryptedCards.sort(new ComparatorByIdCard());
+        //zapishi v textov file
     }
 
     @Override

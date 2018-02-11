@@ -16,7 +16,7 @@ public class Encryption extends UnicastRemoteObject implements Chryptable {
 
     //create empty cards
     //fill with encode
-    public static Cards cards;
+    public Cards cards;
 
     public Encryption() throws RemoteException {
         cards = new Cards();
@@ -35,7 +35,8 @@ public class Encryption extends UnicastRemoteObject implements Chryptable {
         }
 
         Card c = new Card(code);
-        if (cards.getEncryptedCards().contains(c)) {
+        
+        if (cards.contains(c)) {
             int index = cards.getEncryptedCards().indexOf(c);
             c = cards.getEncryptedCards().get(index);
             int num = c.getEncodedCodes().size();

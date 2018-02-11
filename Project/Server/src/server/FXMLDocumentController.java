@@ -55,21 +55,28 @@ public class FXMLDocumentController {
 
     @FXML
     private void sotedByBankCards(ActionEvent event) {
-       // encryp.getCards().sortByBankId();
+      ((Encryption)encryp).cards.sortByBankId();
+      ArrayList<Card> arr=new ArrayList<Card>();
+      arr=((Encryption)encryp).cards.getEncryptedCards();
+      
+      arr.forEach(System.out::println);
 
     }
 
     @FXML
     private void sortedByEncrypted(ActionEvent event) {
-     /*   ArrayList<String> allCards = new ArrayList<String>();
-        for (Card c : encryp.getCards().getEncryptedCards()) {
+        ArrayList<String> allCards = new ArrayList<String>();
+        for (Card c : encryp.cards.getEncryptedCards()){
             allCards.addAll(c.getEncodedCodes());
         }
 
         allCards.sort((one, other) -> one.compareTo(other));
 
+        for(String c: allCards){
+            System.out.println(c + " ID: " + encryp.decode(c));
+            
         //zapisvam vyv file encrypted ot all cards i izvikvam decode(string)
     }
-*/
+
     }
 }
