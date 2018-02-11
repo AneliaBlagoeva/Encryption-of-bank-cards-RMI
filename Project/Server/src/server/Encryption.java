@@ -42,6 +42,7 @@ public class Encryption extends UnicastRemoteObject implements Chryptable {
             int num = c.getEncodedCodes().size();
             if (num > 12) {
                 System.out.println("Error while adding!");
+                return "";
             }
             c.getEncodedCodes().add(resultArr.toString());
         } else {

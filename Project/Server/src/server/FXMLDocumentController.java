@@ -44,13 +44,9 @@ public class FXMLDocumentController {
             encryp = new Encryption();
 
             registry.rebind("Encryption", encryp);
-//            System.in.read();
-            //           System.exit(0);
 
         } catch (RemoteException ex) {
             System.out.println("remote" + ex);
-            //     } catch (IOException ex) {
-            //          Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

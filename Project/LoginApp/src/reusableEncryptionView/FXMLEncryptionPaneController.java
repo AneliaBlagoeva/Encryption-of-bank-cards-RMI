@@ -12,6 +12,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,19 +49,29 @@ public class FXMLEncryptionPaneController extends AnchorPane {
     @FXML
     private void btnEncodeClicked(ActionEvent event) throws IOException {
         try {
+            if(( (txtCode.getText().charAt(0)=='3') || (txtCode.getText().charAt(0)=='4') || (txtCode.getText().charAt(0)=='5')) && (luhnTest(txtCode.getText())==true)){
             String result = encryption.encode(txtCode.getText());
 
             if(!"".equals(result)){
             lblResult.textProperty().setValue(result);
-           // encryption.addCard(result);
             }
             else{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindow.fxml"));
+                //kriptirana e poveche ot 12 pyti
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindowEncryptManyTimes.fxml"));
                    Parent root1 = (Parent) fxmlLoader.load();
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root1));
                     stage.show();
                     }
+            }else{
+                //ne zapochva s 3, 4 i 5 i ne udovletvorqva fomulata na luhn
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindowLuhnAlg.fxml"));
+                   Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+            }
+            
         } catch (RemoteException e) {
             System.out.println("Error while encoding");
         }
@@ -92,4 +103,29 @@ public class FXMLEncryptionPaneController extends AnchorPane {
             System.out.println("Cannot connect to server!");
         }
     }
+    
+    public boolean luhnTest(String s){
+       char[] inputArr = s.toCharArray();
+       int sumOdd=0;
+        int sumDoubledEven=0;
+        
+        ArrayList<Integer> resultArr = new ArrayList<Integer>();
+
+        for (char current : inputArr) {
+                int digit = (Character.getNumericValue(current));
+                resultArr.add(digit);
+            }
+        
+        for(int i=0;i<resultArr.size();i+=2){
+            sumOdd+=resultArr.get(i);
+        }
+        
+        for(int i=1;i<resultArr.size();i+=2){
+            int temp=resultArr.get(i)*2;
+            int sumDigitsTemp=(temp%10)+(temp/10);
+            sumDoubledEven+=sumDigitsTemp;          
+        }
+
+      return ((sumOdd+sumDoubledEven)%10)==0;  
+}
 }

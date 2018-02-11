@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package loginapp;
+package reusableEncryptionView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
  *
  * @author Anelia
  */
-public class ErrorWindowController implements Initializable {
+public class ErrorWindowLuhnAlg implements Initializable {
 
     @FXML
     private Label label;

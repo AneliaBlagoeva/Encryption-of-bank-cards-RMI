@@ -43,14 +43,6 @@ public class Cards implements Sortable{
     @Override
     public void sortByBankId() {
         encryptedCards.sort(new ComparatorByIdCard());
-        //zapishi v textov file
     }
-
-    @Override
-    public void sortByEncryptedId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
     
 }

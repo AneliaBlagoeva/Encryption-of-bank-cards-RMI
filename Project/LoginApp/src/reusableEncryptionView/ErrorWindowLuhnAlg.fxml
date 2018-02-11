@@ -7,9 +7,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="loginapp.ErrorWindowController">
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reusableEncryptionView.ErrorWindowLuhnAlg">
     <children>
-        <Label fx:id="label" layoutX="10.0" layoutY="32.0" minHeight="16" minWidth="69" prefHeight="129.0" prefWidth="297.0" text="Error! Insufficient rights or incorrect credentials." textAlignment="CENTER" textFill="#0f0665" wrapText="true">
+        <Label fx:id="label" layoutX="10.0" layoutY="32.0" minHeight="16" minWidth="69" prefHeight="129.0" prefWidth="297.0" text="Error! The number does not fit Luhn algorithm or starts with 3 or 4 or 5!" textAlignment="CENTER" textFill="#0f0665" wrapText="true">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></Label>

@@ -10,7 +10,5 @@ package cards;
  * @author Anelia
  */
 public interface Sortable {
-    public void sortByBankId();
-    public void sortByEncryptedId();
-    
+    public void sortByBankId();    
 }
