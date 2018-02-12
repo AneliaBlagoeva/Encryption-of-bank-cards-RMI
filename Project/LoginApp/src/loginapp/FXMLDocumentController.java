@@ -12,6 +12,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,7 +74,7 @@ public class FXMLDocumentController{
             //LoginWrapper login=new LoginWrapper((Login)loginObj.getLoginWrapper());
             
             Parent root1;
-            if (!(loginObj.checkCredentials(userName,password))) {
+            if ((!(loginObj.checkCredentials(userName,password))) || (!isValidPassword(password)) || (!(isValidUsername(userName)))) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindow.fxml"));
                     root1 = (Parent) fxmlLoader.load();
@@ -93,6 +95,32 @@ public class FXMLDocumentController{
             System.out.println("Error." + e);
         }
 
+    }
+    
+    
+    public boolean isValidPassword(String password) {
+
+        String PASSWORD_REGEXP =  "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+                
+        Pattern pattern = Pattern.compile(PASSWORD_REGEXP);
+        Matcher matcher;
+        matcher = pattern.matcher(password);
+        return matcher.matches();
+    }
+    
+    
+    public boolean isValidUsername(String username) {
+
+        String  USERNAME_REGEXP = 
+                "(?=.*[A-Z])"
+                + "(?=.*[a-z])" 
+                + "{6,50}"
+                + "$";
+
+        Pattern pattern = Pattern.compile(USERNAME_REGEXP);
+        Matcher matcher;
+        matcher = pattern.matcher(username);
+        return matcher.matches();
     }
 
 }

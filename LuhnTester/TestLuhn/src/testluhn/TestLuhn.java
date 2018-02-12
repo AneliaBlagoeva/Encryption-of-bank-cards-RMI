@@ -43,7 +43,7 @@ public class TestLuhn {
      */
     public static void main(String[] args) {
         
-        System.out.println(luhnTest("3540651119394381"));
+        System.out.println(luhnTest("3560451119394381"));
     }
     
 }

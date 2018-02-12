@@ -60,7 +60,7 @@ public class Encryption extends UnicastRemoteObject implements Chryptable {
 
         for (char current : inputArr) {
             if (Character.isDigit(current)) {
-                int shiftedSymbol = (Character.getNumericValue(current) - 5) % 10;
+                int shiftedSymbol = Math.abs((Character.getNumericValue(current) - 5)) % 10;
                 resultArr.add(shiftedSymbol);
             }
         }
