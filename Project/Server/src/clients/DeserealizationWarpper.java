@@ -1,13 +1,5 @@
 package clients;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 import java.io.BufferedReader;
@@ -17,17 +9,27 @@ import java.io.IOException;
 import java.io.Reader;
 
 /**
+ * class for deserealization of xml file containing users, their passwords and
+ * information for them. This class uses XStream for deserealization.
+ */
+/**
  *
  * @author Anelia
  */
 public class DeserealizationWarpper {
 
+    /**
+     * method for deserealization of users and information for them.
+     * First read the whole file into string and then
+     * deserialize the string.
+     *
+     * @return
+     */
     public static Users deserealization() {
         XStream xs = new XStream(new StaxDriver());
         Users u = new Users();
         try {
             File xmlFile = new File("C:\\Users\\Anelia\\Documents\\NetBeansProjects\\First-steps-in-JAVA\\Project\\Server\\src\\clients\\user.xml");
-
 
             Reader fileReader = new FileReader(xmlFile);
             BufferedReader bufReader = new BufferedReader(fileReader);
@@ -53,7 +55,4 @@ public class DeserealizationWarpper {
 
     }
 
-//    public static void main(String[] args) {
-//            deserealization();
-//    }
 }

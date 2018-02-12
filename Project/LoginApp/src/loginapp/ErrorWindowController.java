@@ -1,8 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * Error window controller if user has not rights or username
+ * or password are incorrect.
+*/
+
 package loginapp;
 
 import java.net.URL;
@@ -22,7 +22,7 @@ public class ErrorWindowController implements Initializable {
     private Label label;
 
     /**
-     * Initializes the controller class.
+     * Initializes the error window controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

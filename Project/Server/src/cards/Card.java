@@ -1,37 +1,50 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cards;
 
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
 /**
+ * Card class contains card id and list from encrypted codes of the card. One
+ * card can have more than one encrypted code
+ */
+/**
  *
  * @author Anelia
  */
-public class Card{
+public class Card {
+
     String cardId;
     ArrayList<String> encodedCodes;
 
+    /**
+     * getter of card id
+     *
+     */
     public String getCardId() {
-        
+
         return cardId;
     }
 
-    public Card(String cardId){
+    /**
+     * constructor of class card
+     *
+     * @param cardId
+     */
+    public Card(String cardId) {
         setCardId(cardId);
-        encodedCodes=new ArrayList<String>();
+        encodedCodes = new ArrayList<String>();
     }
 
+    /**
+     * setter of card class sets card id
+     *
+     * @param cardId
+     */
     public void setCardId(String cardId) {
-        if(cardId.length()>16){
+        if (cardId.length() > 16) {
             System.out.println("Invalid number");
-        }else{
-        this.cardId = cardId;
+        } else {
+            this.cardId = cardId;
         }
     }
 
@@ -39,21 +52,38 @@ public class Card{
         return encodedCodes;
     }
 
+    /**
+     * setter of card class sets encrypted codes list
+     *
+     * @param encodedCodes
+     */
     public void setEncodedCodes(ArrayList<String> encodedCodes) {
         this.encodedCodes = encodedCodes;
     }
 
+    /**
+     * constructor of class card
+     *
+     * @param cardId
+     * @param encodedCode
+     */
     public Card(String cardId, ArrayList<String> encodedCode) {
         setCardId(cardId);
         setEncodedCodes(encodedCode);
     }
 
- @Override
+    /**
+     * override method equals for using method contains compare cards by card id
+     *
+     * @param obj
+     * @return
+     */
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Card)) {
             return false;
         } else {
-            return (this.cardId.equals(((Card) obj).getCardId()) );
+            return (this.cardId.equals(((Card) obj).getCardId()));
         }
     }
 
@@ -64,11 +94,13 @@ public class Card{
         return hash;
     }
 
+    /**
+     * override method to string
+     * @return 
+     */
     @Override
     public String toString() {
         return "Card{" + "cardId=" + cardId + ", encodedCodes=" + encodedCodes + '}';
     }
 
-    
-    
 }

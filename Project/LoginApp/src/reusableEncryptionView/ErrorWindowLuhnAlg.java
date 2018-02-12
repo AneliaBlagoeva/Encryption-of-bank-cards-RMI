@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reusableEncryptionView;
 
 import java.net.URL;
@@ -10,6 +5,12 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+
+/**
+ * Error window FXML Controller class if card
+ * number is < 16 symvols, doesnt start with 3,4,5
+ * or doesnt match Luhn algorithm
+*/
 
 /**
  * FXML Controller class

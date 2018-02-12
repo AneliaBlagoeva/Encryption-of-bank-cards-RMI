@@ -1,8 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ * Login window controller. It contains event handlers for login button
+ * and check if credentials are correct or if the user has rights for encrypt/decrypt
+*/
 package loginapp;
 
 import common.ILoginable;
@@ -45,7 +44,9 @@ public class FXMLDocumentController{
 
     public ILoginable loginObj;
 
-   
+   /**
+    * get instance from ILoginable interface from registry Login on port 1099
+    * */
     public void initializeRMI() {
          try {
             Registry registry = LocateRegistry.getRegistry(1099);
@@ -63,6 +64,10 @@ public class FXMLDocumentController{
         }
     }
 
+    /**
+     * Event handler on button login clicked. Checks if the user has rights or if username
+     * and password are correct  . Calls method from server side.
+     * */
     @FXML
     private void onBtnLoginClicked(ActionEvent event) throws IOException {
         try {
@@ -71,10 +76,9 @@ public class FXMLDocumentController{
             String password = txtPassword.getText();
             
             initializeRMI();
-            //LoginWrapper login=new LoginWrapper((Login)loginObj.getLoginWrapper());
             
             Parent root1;
-            if ((!(loginObj.checkCredentials(userName,password))) || (!isValidPassword(password)) || (!(isValidUsername(userName)))) {
+            if (!((loginObj.checkCredentials(userName,password)) && isValidPassword(password) && isValidUsername(userName))) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindow.fxml"));
                     root1 = (Parent) fxmlLoader.load();
@@ -97,7 +101,11 @@ public class FXMLDocumentController{
 
     }
     
-    
+    /**
+     * Method for validating password by regex expression. 
+      The password should contains digit, small letter, upercase letter, 
+      special symbol and have to be min 8 symbols 
+      */
     public boolean isValidPassword(String password) {
 
         String PASSWORD_REGEXP =  "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
@@ -108,14 +116,14 @@ public class FXMLDocumentController{
         return matcher.matches();
     }
     
-    
+    /**
+     * Method for validating username by regex expression. 
+      The username should contains small letter, upercase letter, 
+      can contains digit 
+      */
     public boolean isValidUsername(String username) {
 
-        String  USERNAME_REGEXP = 
-                "(?=.*[A-Z])"
-                + "(?=.*[a-z])" 
-                + "{6,50}"
-                + "$";
+        String  USERNAME_REGEXP ="^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$";
 
         Pattern pattern = Pattern.compile(USERNAME_REGEXP);
         Matcher matcher;

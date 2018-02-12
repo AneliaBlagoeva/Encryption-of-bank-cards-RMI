@@ -25,7 +25,7 @@ public static boolean isValidPassword(String password) {
 
 public static boolean isValidUsername(String username) {
 
-        String  USERNAME_REGEXP = "^(?=.*[A-Z])(?=.*[a-z]){6,50}$";
+        String  USERNAME_REGEXP = "^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$";
 
         Pattern pattern = Pattern.compile(USERNAME_REGEXP);
         Matcher matcher;
@@ -37,7 +37,7 @@ public static boolean isValidUsername(String username) {
      */
     public static void main(String[] args) {
         System.out.println(isValidPassword("123aB@aB"));
-        System.out.println(isValidUsername("Anelia"));
+        System.out.println(isValidUsername("Desi"));
         // TODO code application logic here
     }
     

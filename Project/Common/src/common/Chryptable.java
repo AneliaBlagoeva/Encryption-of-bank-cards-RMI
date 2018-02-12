@@ -1,23 +1,23 @@
 package common;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Interface for encryption feature shared by server and client
  */
-
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-/**
- *
- * @author grade
- */
+
 public interface Chryptable extends Remote {
 
+    /**
+    method with main logic for encoding card id code
+*/
     String encode(String code) throws RemoteException;
 
+    /**
+     * method for decoding card id code
+     * */
     String decode(String code) throws RemoteException;
     
 }

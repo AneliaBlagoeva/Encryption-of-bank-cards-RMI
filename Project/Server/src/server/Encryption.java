@@ -1,9 +1,9 @@
 package server;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * One of the most important class.
+ * Implements Cryptable interface.
+ * Here is the main logic for encode and decode.
  */
 import cards.Card;
 import cards.Cards;
@@ -14,14 +14,26 @@ import java.util.ArrayList;
 
 public class Encryption extends UnicastRemoteObject implements Chryptable {
 
-    //create empty cards
-    //fill with encode
+
     public Cards cards;
 
+    /**
+     * constructor
+     * @throws RemoteException 
+     */
     public Encryption() throws RemoteException {
         cards = new Cards();
     }
 
+    /**
+     * event handller for button encode clicked
+     * Encode the card.
+     * Check if card is already encrypted. If true we add encrypted code to
+     * sublist of encrypted codes for the exact card.
+     * If false we add  the cards in list of all cards.
+     * @param code
+     * @return 
+     */
     @Override
     public String encode(String code) {
         char[] inputArr = code.toCharArray();
@@ -53,6 +65,11 @@ public class Encryption extends UnicastRemoteObject implements Chryptable {
         return resultArr.toString();
     }
 
+    /**
+     * Event handler for button decode clicked
+     * @param code
+     * @return 
+     */
     @Override
     public String decode(String code) {
         char[] inputArr = code.toCharArray();

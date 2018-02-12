@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package server;
 
 import cards.Card;
@@ -20,6 +15,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+
+/**
+ * FXML controller class for server interface.
+ * Server contains two buttons, for create file
+ * of encrypted cards sorted by card id
+ * and button for creating file with ecrypted card id
+ * sorted by encrypted nums.
+ */
 /**
  *
  * @author Anelia
@@ -34,6 +37,11 @@ public class FXMLDocumentController {
     private Encryption encryp;
     //private Cards cards;
 
+    /**
+     * MAIN part
+     * create registry for Login class
+     * and Encryption class on port 1099.
+     */
     public void inizializeServer() {
         try {
             ILoginable o = new Login();
@@ -50,10 +58,20 @@ public class FXMLDocumentController {
         }
     }
 
+    /**
+     * constructor in which we inizialize
+     * a server and create registry
+     */
     public FXMLDocumentController() {
         inizializeServer();
     }
 
+    /**
+     * event handler for button generate txt file
+     * of card ids, sorted by card id.
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void sotedByBankCards(ActionEvent event) throws IOException {
         ((Encryption) encryp).cards.sortByBankId();
@@ -66,6 +84,11 @@ public class FXMLDocumentController {
 
     }
 
+    /**
+     * event handler for button generate txt file
+     * with card id sorted by encrypted code clicked.
+     * @param event 
+     */
     @FXML
     private void sortedByEncrypted(ActionEvent event) {
         ArrayList<String> allCards = new ArrayList<String>();
@@ -88,6 +111,12 @@ public class FXMLDocumentController {
 
     }
     
+    /**
+     * helper function for writing into
+     * txt file
+     * @param line
+     * @throws IOException 
+     */
     public static void writeToFile(String line) throws IOException {
         FileOutputStream fop = null;
 		File file;

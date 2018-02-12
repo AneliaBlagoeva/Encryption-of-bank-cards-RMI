@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reusableEncryptionView;
 
 import common.Chryptable;
@@ -24,6 +19,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/** Encryption window. It contains textfield for 
+ * card number code and buttons encrypt and decrypt.
+ * The relationship with the server is by shared instance of type Interface
+ * Cryptable.
+*/
+
 /**
  * FXML Controller class
  *
@@ -42,10 +43,18 @@ public class FXMLEncryptionPaneController extends AnchorPane {
 
     Chryptable encryption = null;
 
+    /** Constructor in which we get
+    the instance of registry Encryption.
+    */
     public FXMLEncryptionPaneController() {
         initializeRMI();
-           
     }
+    
+    /**
+    Event handler on button encrypt clicked.Also this method checks
+    for validation of the card number. 
+    Call method for encrypt from server side;
+    */
     @FXML
     private void btnEncodeClicked(ActionEvent event) throws IOException {
         try {
@@ -56,7 +65,9 @@ public class FXMLEncryptionPaneController extends AnchorPane {
             lblResult.textProperty().setValue(result);
             }
             else{
-                //kriptirana e poveche ot 12 pyti
+                /**
+                 if card number is encrypted more than 12 times load error window
+                */
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindowEncryptManyTimes.fxml"));
                    Parent root1 = (Parent) fxmlLoader.load();
                     Stage stage = new Stage();
@@ -64,7 +75,9 @@ public class FXMLEncryptionPaneController extends AnchorPane {
                     stage.show();
                     }
             }else{
-                //ne zapochva s 3, 4 i 5 i ne udovletvorqva fomulata na luhn
+                /**
+                 * if card number does not start with 3,4,5 ot does not match Luhn algorithm load error window
+                */
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindowLuhnAlg.fxml"));
                    Parent root1 = (Parent) fxmlLoader.load();
                     Stage stage = new Stage();
@@ -77,19 +90,52 @@ public class FXMLEncryptionPaneController extends AnchorPane {
         }
     }
 
+    /**
+    Event handler on button decrypt clicked.Also this method checks
+    for validation of the card number. 
+    Call method for encrypt from server side;
+    */
     @FXML
-    private void btnDecodeClicked(ActionEvent event) {
-        try {
-            
+    private void btnDecodeClicked(ActionEvent event) throws IOException {
+       try {
+            if(( (txtCode.getText().charAt(0)=='3') || (txtCode.getText().charAt(0)=='4') || (txtCode.getText().charAt(0)=='5')) && (luhnTest(txtCode.getText())==true)){
             String result = encryption.decode(txtCode.getText());
-            lblResult.textProperty()
-                    .setValue(result);
+
+            if(!"".equals(result)){
+            lblResult.textProperty().setValue(result);
+            }
+            else{
+                /**
+                if card number is encrypted more than 12 times load error window
+                */
+                
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindowEncryptManyTimes.fxml"));
+                   Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+                    }
+            }else{
+                /** 
+                 if card number does not start with 3,4,5 ot does not match Luhn algorithm load error window
+                */
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindowLuhnAlg.fxml"));
+                   Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+            }
+            
         } catch (RemoteException e) {
-            System.out.println("Error while decoding");
+            System.out.println("Error while encoding");
         }
 
     }
 
+    /**
+    Method for getting instance of Interface Cryptable from
+    registry Encryption on port 1099
+    */
     public void initializeRMI() {
         try {
             Registry registry = LocateRegistry.getRegistry(1099);
@@ -104,6 +150,14 @@ public class FXMLEncryptionPaneController extends AnchorPane {
         }
     }
     
+    /**
+    Method for testing if card number is valid by Luhn algorithm.
+    1. Sum all digit on odd position -- s1
+    2. Double all digits on even positions
+    3. Sum digits from 2 and this them as numbers on even positions
+    4. Sum all digits from 3 -- s2
+    5. To be correct card num have to match s1 + s2 % 10 is null
+    */
     public boolean luhnTest(String s){
        char[] inputArr = s.toCharArray();
        int sumOdd=0;

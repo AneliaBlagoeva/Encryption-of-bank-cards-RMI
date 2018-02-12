@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Main application. Visualize login window.
  */
 package client;
 
@@ -19,7 +17,9 @@ import javafx.stage.Stage;
 public class LoginApp extends Application {
     
     
-    
+ /**
+  * load main login window    
+  * */
 @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/loginapp/FXMLDocument.fxml"));
@@ -30,12 +30,15 @@ public class LoginApp extends Application {
         stage.show();
     }
 
+    
+    /**
+     * entry point of an application
+     * */
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      
-        
+
         launch(args);
     }
     
