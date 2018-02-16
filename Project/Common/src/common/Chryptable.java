@@ -12,12 +12,14 @@ public interface Chryptable extends Remote {
 
     /**
     method with main logic for encoding card id code
+     * @throws java.rmi.RemoteException
 */
     String encode(String code) throws RemoteException;
 
     /**
      * method for decoding card id code
-     * */
+     *
+     * @throws java.rmi.RemoteException */
     String decode(String code) throws RemoteException;
     
 }

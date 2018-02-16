@@ -93,7 +93,7 @@ public class FXMLDocumentController {
     private void sortedByEncrypted(ActionEvent event) {
         ArrayList<String> allCards = new ArrayList<String>();
         for (Card c : encryp.cards.getEncryptedCards()) {
-            allCards.addAll(c.getEncodedCodes());
+            allCards.addAll(c.EncryptedCodeToStringList());
         }
 
         allCards.sort((one, other) -> one.compareTo(other));

@@ -14,7 +14,11 @@ import java.util.Objects;
 public class Card {
 
     String cardId;
-    ArrayList<String> encodedCodes;
+    ArrayList<EncryptedCode> encodedCodes;
+
+    public Card() {
+        encodedCodes = new ArrayList<EncryptedCode>();
+    }
 
     /**
      * getter of card id
@@ -32,7 +36,7 @@ public class Card {
      */
     public Card(String cardId) {
         setCardId(cardId);
-        encodedCodes = new ArrayList<String>();
+        encodedCodes = new ArrayList<EncryptedCode>();
     }
 
     /**
@@ -48,16 +52,24 @@ public class Card {
         }
     }
 
-    public ArrayList<String> getEncodedCodes() {
+    public ArrayList<EncryptedCode> getEncodedCodes() {
         return encodedCodes;
     }
 
+    public ArrayList<String> EncryptedCodeToStringList(){
+        ArrayList<String> result=new ArrayList<>();
+        
+        for(EncryptedCode e:encodedCodes){
+            result.add(e.code);
+    }
+        return result;
+    }
     /**
      * setter of card class sets encrypted codes list
      *
      * @param encodedCodes
      */
-    public void setEncodedCodes(ArrayList<String> encodedCodes) {
+    public void setEncodedCodes(ArrayList<EncryptedCode> encodedCodes) {
         this.encodedCodes = encodedCodes;
     }
 
@@ -67,7 +79,7 @@ public class Card {
      * @param cardId
      * @param encodedCode
      */
-    public Card(String cardId, ArrayList<String> encodedCode) {
+    public Card(String cardId, ArrayList<EncryptedCode> encodedCode) {
         setCardId(cardId);
         setEncodedCodes(encodedCode);
     }

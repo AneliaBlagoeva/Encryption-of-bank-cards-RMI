@@ -68,7 +68,7 @@ public class FXMLEncryptionPaneController extends AnchorPane {
                 /**
                  if card number is encrypted more than 12 times load error window
                 */
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindowEncryptManyTimes.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/reusableEncryptionView/ErrorWindowEncryptManyTimes.fxml"));
                    Parent root1 = (Parent) fxmlLoader.load();
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root1));
@@ -76,9 +76,9 @@ public class FXMLEncryptionPaneController extends AnchorPane {
                     }
             }else{
                 /**
-                 * if card number does not start with 3,4,5 ot does not match Luhn algorithm load error window
+                 * if card number does not start with 3,4,5 or does not match Luhn algorithm load error window
                 */
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindowLuhnAlg.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/reusableEncryptionView/ErrorWindowLuhnAlg.fxml"));
                    Parent root1 = (Parent) fxmlLoader.load();
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root1));
@@ -98,7 +98,7 @@ public class FXMLEncryptionPaneController extends AnchorPane {
     @FXML
     private void btnDecodeClicked(ActionEvent event) throws IOException {
        try {
-            if(( (txtCode.getText().charAt(0)=='3') || (txtCode.getText().charAt(0)=='4') || (txtCode.getText().charAt(0)=='5')) && (luhnTest(txtCode.getText())==true)){
+            System.out.println(txtCode.getText());
             String result = encryption.decode(txtCode.getText());
 
             if(!"".equals(result)){
@@ -106,30 +106,19 @@ public class FXMLEncryptionPaneController extends AnchorPane {
             }
             else{
                 /**
-                if card number is encrypted more than 12 times load error window
+                card is not existing
                 */
                 
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindowEncryptManyTimes.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/reusableEncryptionView/ErrorWindowNotExistingCard.fxml"));
                    Parent root1 = (Parent) fxmlLoader.load();
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root1));
                     stage.show();
                     }
-            }else{
-                /** 
-                 if card number does not start with 3,4,5 ot does not match Luhn algorithm load error window
-                */
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ErrorWindowLuhnAlg.fxml"));
-                   Parent root1 = (Parent) fxmlLoader.load();
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(root1));
-                    stage.show();
+            }catch(IOException e){
+                System.out.println("Error while decrypting!");
             }
-            
-        } catch (RemoteException e) {
-            System.out.println("Error while encoding");
-        }
-
+               
     }
 
     /**
